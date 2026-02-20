@@ -52,7 +52,7 @@
                     </div>
                 </div>
                 <div class="col-md-2 text-end">
-                    <a href="{{ route('admin.fees.plans') }}" class="btn btn-outline-secondary w-100">
+                    <a href="{{ route('admin.fee-plans.index') }}" class="btn btn-outline-secondary w-100">
                         <i class="bi bi-calculator me-1"></i>خطط الرسوم
                     </a>
                 </div>

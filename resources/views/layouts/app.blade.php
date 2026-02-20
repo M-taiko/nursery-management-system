@@ -65,7 +65,7 @@
 
             <!-- Footer -->
             <footer class="footer glass-card">
-                <span class="text-muted small">
+                <span style="color:var(--text-muted);font-size:0.8rem;">
                     نظام إدارة الحضانة &copy; {{ date('Y') }} &mdash;
                     تم التطوير بواسطة <a href="https://masarsoft.io" target="_blank" rel="noopener" style="color:var(--primary);text-decoration:none;font-weight:600;">masarsoft.io</a>
                 </span>

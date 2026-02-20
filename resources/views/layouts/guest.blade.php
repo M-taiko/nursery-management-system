@@ -23,9 +23,10 @@
 
                 <!-- Logo -->
                 <div class="text-center mb-4" data-aos="fade-down">
-                    <div class="d-inline-flex align-items-center justify-content-center rounded-circle mb-3"
-                         style="width:72px;height:72px;background:rgba(255,255,255,0.15);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.2);">
-                        <i class="bi bi-mortarboard-fill text-warning" style="font-size:2rem;"></i>
+                    <div class="d-inline-flex align-items-center justify-content-center mb-3"
+                         style="width:100px;height:100px;border-radius:20px;background:rgba(255,255,255,0.12);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.2);padding:8px;">
+                        <img src="{{ asset('images/logo.jpg') }}" alt="شعار الحضانة"
+                             style="width:100%;height:100%;object-fit:contain;border-radius:12px;">
                     </div>
                     <h2 class="text-white fw-700 mb-1">نظام إدارة الحضانة</h2>
                     <p class="mb-0" style="color:rgba(199,210,254,0.75);font-size:0.875rem;">مرحباً بك في النظام المتكامل</p>

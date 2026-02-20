@@ -54,6 +54,26 @@
   --shadow-xl: 0 20px 40px rgba(0, 0, 0, 0.6), 0 10px 20px rgba(0, 0, 0, 0.4);
 }
 
+// === Bootstrap Text Utilities Dark Mode Override ===
+[data-theme="dark"] {
+  // Override Bootstrap's hardcoded text-muted color
+  .text-muted {
+    color: var(--text-muted) !important;
+  }
+
+  // Bootstrap's body secondary color (used by text-muted in BS 5.3)
+  --bs-secondary-color: var(--text-secondary);
+  --bs-body-color: var(--text-primary);
+  --bs-body-bg: var(--bg-body);
+
+  // Footer specific
+  .footer {
+    background: var(--glass-bg) !important;
+    border-color: var(--glass-border) !important;
+    color: var(--text-muted) !important;
+  }
+}
+
 // === Bootstrap Tables Dark Mode Override ===
 [data-theme="dark"] {
   .table,

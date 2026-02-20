@@ -4,7 +4,8 @@
     <!-- Logo -->
     <div class="sidebar-logo" data-aos="fade-down" data-aos-delay="100">
         <div class="logo-icon">
-            <i class="bi bi-mortarboard-fill"></i>
+            <img src="{{ asset('images/logo.jpg') }}" alt="شعار الحضانة"
+                 style="width:44px;height:44px;object-fit:contain;border-radius:10px;">
         </div>
         <div class="logo-text">
             <h1>الحضانة</h1>
