@@ -1,0 +1,157 @@
+// ============================================
+// Design System Variables - Dark Mode
+// ============================================
+
+[data-theme="dark"] {
+  // === Primary Colors (Lighter in dark mode) ===
+  --primary: #818cf8;
+  --primary-rgb: 129, 140, 248;
+  --secondary: #a78bfa;
+  --secondary-rgb: 167, 139, 250;
+  --success: #34d399;
+  --danger: #f87171;
+  --warning: #fbbf24;
+  --info: #38bdf8;
+
+  // === Background Colors ===
+  --bg-body: #0f172a;
+  --bg-surface: #1e293b;
+  --bg-gradient: linear-gradient(135deg, #1e2a5a 0%, #0f172a 100%);
+
+  // === Text Colors ===
+  --text-primary: #f1f5f9;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
+  --text-white: #ffffff;
+
+  // === Border Colors ===
+  --border-color: #334155;
+  --border-color-light: #1e293b;
+
+  // === Glassmorphism Effect (Dark Mode) ===
+  --glass-bg: rgba(30, 30, 46, 0.7);
+  --glass-bg-hover: rgba(30, 30, 46, 0.85);
+  --glass-border: rgba(255, 255, 255, 0.1);
+  --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  --glass-shadow-hover: 0 12px 40px rgba(0, 0, 0, 0.6);
+  --glass-blur: blur(12px);
+  --glass-backdrop: rgba(30, 30, 46, 0.5);
+
+  // === Sidebar (Dark Mode) ===
+  --sidebar-bg: linear-gradient(160deg, #0f0e2e 0%, #1e1b4b 50%, #2d1b69 100%);
+  --sidebar-text: #f1f5f9;
+  --sidebar-text-hover: #fbbf24;
+  --sidebar-item-hover: rgba(255, 255, 255, 0.05);
+
+  // === Mobile Navigation (Dark Mode) ===
+  --mobile-nav-bg: rgba(30, 41, 59, 0.9);
+  --mobile-nav-shadow: 0 -2px 20px rgba(0, 0, 0, 0.3);
+
+  // === Shadows (Darker in dark mode) ===
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.5), 0 1px 2px rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.3), 0 2px 4px rgba(0, 0, 0, 0.2);
+  --shadow-lg: 0 10px 20px rgba(0, 0, 0, 0.4), 0 3px 6px rgba(0, 0, 0, 0.3);
+  --shadow-xl: 0 20px 40px rgba(0, 0, 0, 0.6), 0 10px 20px rgba(0, 0, 0, 0.4);
+}
+
+// === Bootstrap Tables Dark Mode Override ===
+[data-theme="dark"] {
+  .table,
+  .table-modern,
+  .table-glass {
+    --bs-table-bg: transparent;
+    --bs-table-color: var(--text-primary);
+    --bs-table-border-color: var(--glass-border);
+    --bs-table-striped-bg: rgba(255, 255, 255, 0.03);
+    --bs-table-striped-color: var(--text-primary);
+    --bs-table-hover-bg: rgba(255, 255, 255, 0.05);
+    --bs-table-hover-color: var(--text-primary);
+    --bs-table-active-bg: rgba(255, 255, 255, 0.07);
+    --bs-table-active-color: var(--text-primary);
+    color: var(--text-primary);
+    border-color: var(--glass-border);
+
+    thead th,
+    tfoot td {
+      background: var(--glass-backdrop) !important;
+      color: var(--text-secondary) !important;
+      border-color: var(--glass-border) !important;
+    }
+
+    tbody tr {
+      background: transparent;
+      color: var(--text-primary);
+      border-color: var(--glass-border);
+
+      td {
+        color: var(--text-primary) !important;
+        border-color: var(--glass-border) !important;
+        background: transparent !important;
+      }
+
+      &:hover td {
+        background: rgba(255, 255, 255, 0.04) !important;
+      }
+    }
+  }
+
+  // Bootstrap select/input dark mode
+  .form-control,
+  .form-select {
+    background-color: var(--bg-surface);
+    color: var(--text-primary);
+    border-color: var(--glass-border);
+
+    &:focus {
+      background-color: var(--bg-surface);
+      color: var(--text-primary);
+      border-color: var(--primary);
+    }
+  }
+
+  .input-group-text {
+    background-color: var(--bg-surface);
+    color: var(--text-secondary);
+    border-color: var(--glass-border);
+  }
+}
+
+// === Image Filters for Dark Mode ===
+[data-theme="dark"] {
+  img:not([data-no-dark-filter]) {
+    filter: brightness(0.9) contrast(1.1);
+  }
+
+  // Dim illustrations in dark mode
+  .illustration,
+  [class*="illustration"],
+  [class*="icon-"] {
+    opacity: 0.9;
+  }
+
+  // Code blocks
+  code,
+  pre {
+    background: rgba(0, 0, 0, 0.3);
+    border-color: var(--border-color);
+  }
+
+  // Scrollbar styling for dark mode
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: var(--bg-surface);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: rgba(148, 163, 184, 0.3);
+    border-radius: 4px;
+
+    &:hover {
+      background: rgba(148, 163, 184, 0.5);
+    }
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(php artisan:*)",
+      "Bash(composer require:*)",
+      "Bash(npm uninstall:*)",
+      "Bash(npm install:*)",
+      "Bash(ls:*)",
+      "Bash(wc:*)",
+      "Bash(npm run build:*)",
+      "Bash(timeout 10 npm run dev:*)",
+      "Bash(timeout 5 npm run dev:*)",
+      "Bash(npm run dev:*)",
+      "Bash(powershell -Command \"Get-ChildItem -Path ''C:\\\\xampp\\\\htdocs\\\\Nursery-managment-system\\\\resources\\\\views'' -Recurse -Filter ''*.blade.php'' | ForEach-Object { \\(Get-Content $_.FullName -Encoding UTF8\\) -replace ''ر\\\\.س'', ''ج.م'' | Set-Content $_.FullName -Encoding UTF8 }\")",
+      "Bash(python3:*)",
+      "Bash(cmd /c \"echo Get-ChildItem -Path ''C:\\\\xampp\\\\htdocs\\\\Nursery-managment-system\\\\resources\\\\views'' -Recurse -Filter ''*.blade.php'' ^| ForEach-Object { \\(Get-Content $_FullName -Encoding UTF8\\) -replace [regex]::Escape\\(''ر.س''\\), ''ج.م'' ^| Set-Content $_FullName -Encoding UTF8 } > C:\\\\Windows\\\\Temp\\\\replace_currency.ps1\")",
+      "Bash(powershell -ExecutionPolicy Bypass -File \"C:\\\\Windows\\\\Temp\\\\replace_currency.ps1\")",
+      "Bash(cmd /c \"type C:\\\\Windows\\\\Temp\\\\replace_currency.ps1\")",
+      "Bash(cmd /c \"dir C:\\\\Windows\\\\Temp\\\\replace_currency.ps1\")",
+      "Bash(dir:*)",
+      "Bash(cmd /c \"npm run build\")",
+      "Bash(node_modules/.bin/vite build:*)",
+      "Bash(echo:*)",
+      "Bash(grep:*)",
+      "Bash(findstr:*)",
+      "Bash(node -e:*)",
+      "Bash(npm view:*)",
+      "Bash(git remote add:*)",
+      "Bash(git add:*)",
+      "Bash(powershell -Command:*)",
+      "Bash(git check-ignore:*)"
+    ]
+  }
+}

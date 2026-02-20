@@ -1,0 +1,29 @@
+{
+  "name": "نظام إدارة الحضانة",
+  "short_name": "الحضانة",
+  "description": "نظام متكامل لإدارة الحضانة",
+  "start_url": "/dashboard",
+  "display": "standalone",
+  "background_color": "#1e2a5a",
+  "theme_color": "#4e73df",
+  "orientation": "portrait",
+  "dir": "rtl",
+  "lang": "ar",
+  "scope": "/",
+  "icons": [
+    {
+      "src": "/images/icons/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["education", "productivity"],
+  "screenshots": [
+    {
+      "src": "/images/screenshots/dashboard.png",
+      "sizes": "540x720",
+      "type": "image/png"
+    }
+  ]
+}

@@ -1,0 +1,423 @@
+// ============================================
+// Mobile Bottom Navigation
+// ============================================
+
+.mobile-bottom-nav {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  z-index: var(--z-sticky);
+  padding-bottom: env(safe-area-inset-bottom); // iOS notch support
+
+  // Hide on desktop
+  @media (min-width: $desktop) {
+    display: none !important;
+  }
+
+  .nav-container {
+    background: var(--mobile-nav-bg);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    border-top: 1px solid var(--glass-border);
+    box-shadow: var(--mobile-nav-shadow);
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: var(--mobile-nav-height);
+    padding: 0.5rem;
+    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+  }
+
+  // Individual nav item
+  .mobile-nav-item {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.25rem;
+    padding: 0.5rem;
+    border-radius: var(--radius-md);
+    color: var(--text-secondary);
+    text-decoration: none;
+    transition: all var(--transition-fast);
+    position: relative;
+    min-width: 60px;
+
+    // Icon
+    i {
+      font-size: 1.25rem;
+      transition: all var(--transition-base);
+    }
+
+    // Label
+    span {
+      font-size: 0.625rem;
+      font-weight: 500;
+      text-align: center;
+      transition: all var(--transition-base);
+    }
+
+    // Active state
+    &.active {
+      color: var(--primary);
+
+      i {
+        transform: scale(1.1);
+      }
+
+      span {
+        font-weight: 600;
+      }
+
+      // Active indicator dot
+      &::before {
+        content: '';
+        position: absolute;
+        top: 0.25rem;
+        width: 4px;
+        height: 4px;
+        background: var(--primary);
+        border-radius: 50%;
+        animation: ping 1.5s cubic-bezier(0, 0, 0.2, 1) infinite;
+      }
+    }
+
+    // Hover effect (for devices that support hover)
+    @media (hover: hover) {
+      &:hover:not(.active) {
+        background: var(--glass-backdrop);
+        color: var(--text-primary);
+
+        i {
+          transform: translateY(-2px);
+        }
+      }
+    }
+
+    // Badge (for notifications)
+    .badge {
+      position: absolute;
+      top: 0.25rem;
+      left: 50%;
+      transform: translateX(8px);
+      min-width: 18px;
+      height: 18px;
+      padding: 0 4px;
+      background: var(--danger);
+      color: white;
+      border-radius: 9px;
+      font-size: 0.625rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 2px solid var(--bg-body);
+      animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    }
+  }
+
+  // Ripple effect on tap
+  .mobile-nav-item::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(var(--primary-rgb), 0.3);
+    transform: translate(-50%, -50%);
+    transition: width 0.3s, height 0.3s;
+    pointer-events: none;
+  }
+
+  .mobile-nav-item:active::after {
+    width: 100%;
+    height: 100%;
+    transition: none;
+  }
+}
+
+// === Mobile Drawer (for sidebar on mobile) ===
+
+.mobile-drawer {
+  position: fixed;
+  top: 0;
+  right: -100%; // RTL: starts from right
+  width: 80%;
+  max-width: 320px;
+  height: 100vh;
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  box-shadow: -2px 0 20px rgba(0, 0, 0, 0.1);
+  z-index: var(--z-modal);
+  transition: right var(--transition-slow) var(--ease-smooth);
+  overflow-y: auto;
+  padding-top: env(safe-area-inset-top); // iOS notch
+  padding-bottom: calc(var(--mobile-nav-height) + env(safe-area-inset-bottom));
+
+  &.open {
+    right: 0;
+  }
+
+  // Drawer header
+  .drawer-header {
+    padding: 1.5rem;
+    border-bottom: 1px solid var(--glass-border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    h5 {
+      margin: 0;
+      color: var(--text-primary);
+    }
+
+    .close-btn {
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      color: var(--text-secondary);
+      cursor: pointer;
+      padding: 0.25rem;
+      line-height: 1;
+
+      &:hover {
+        color: var(--text-primary);
+      }
+    }
+  }
+
+  // Drawer content
+  .drawer-content {
+    padding: 1rem;
+  }
+}
+
+// Drawer backdrop/overlay
+.mobile-drawer-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: calc(var(--z-modal) - 1);
+  opacity: 0;
+  visibility: hidden;
+  transition: all var(--transition-base);
+
+  &.show {
+    opacity: 1;
+    visibility: visible;
+  }
+}
+
+// === Bottom Sheet (for filters, actions on mobile) ===
+
+.bottom-sheet {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.1);
+  z-index: var(--z-modal);
+  max-height: 90vh;
+  transform: translateY(100%);
+  transition: transform var(--transition-slow) var(--ease-smooth);
+  overflow-y: auto;
+
+  &.show {
+    transform: translateY(0);
+  }
+
+  // Handle bar (drag indicator)
+  .sheet-handle {
+    width: 40px;
+    height: 4px;
+    background: var(--text-muted);
+    border-radius: 2px;
+    margin: 0.75rem auto;
+    opacity: 0.5;
+  }
+
+  // Sheet header
+  .sheet-header {
+    padding: 1rem 1.5rem;
+    border-bottom: 1px solid var(--glass-border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    h6 {
+      margin: 0;
+      color: var(--text-primary);
+      font-weight: 600;
+    }
+
+    .close-btn {
+      background: none;
+      border: none;
+      font-size: 1.25rem;
+      color: var(--text-secondary);
+      cursor: pointer;
+      padding: 0;
+      line-height: 1;
+    }
+  }
+
+  // Sheet content
+  .sheet-content {
+    padding: 1.5rem;
+  }
+
+  // Sheet footer (for actions)
+  .sheet-footer {
+    padding: 1rem 1.5rem;
+    border-top: 1px solid var(--glass-border);
+    background: var(--glass-backdrop);
+  }
+}
+
+// === Pull to Refresh Indicator ===
+
+.pull-to-refresh {
+  position: absolute;
+  top: -60px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--primary);
+  opacity: 0;
+  transition: all var(--transition-base);
+
+  &.pulling {
+    opacity: 1;
+    top: 10px;
+  }
+
+  &.refreshing {
+    opacity: 1;
+    top: 10px;
+
+    i {
+      animation: spin 0.6s linear infinite;
+    }
+  }
+
+  i {
+    font-size: 1.5rem;
+  }
+}
+
+// === Swipe Indicators ===
+
+.swipe-indicator {
+  position: fixed;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 50px;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--glass-bg);
+  backdrop-filter: blur(8px);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-lg);
+  opacity: 0;
+  transition: opacity var(--transition-fast);
+  pointer-events: none;
+
+  &.swipe-right {
+    right: 10px;
+  }
+
+  &.swipe-left {
+    left: 10px;
+  }
+
+  &.show {
+    opacity: 1;
+  }
+
+  i {
+    font-size: 1.5rem;
+    color: var(--primary);
+  }
+}
+
+// === Mobile-Specific Utilities ===
+
+// Prevent overscroll bounce on iOS
+.mobile-prevent-bounce {
+  overscroll-behavior-y: none;
+}
+
+// Touch-friendly spacing
+.touch-target {
+  min-height: 44px;
+  min-width: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+// Hide scrollbar on mobile (but keep functionality)
+.mobile-hide-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+// Safe area spacing for iOS notch
+.safe-area-top {
+  padding-top: env(safe-area-inset-top);
+}
+
+.safe-area-bottom {
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+.safe-area-left {
+  padding-left: env(safe-area-inset-left);
+}
+
+.safe-area-right {
+  padding-right: env(safe-area-inset-right);
+}
+
+// === Responsive Adjustments ===
+
+@media (max-width: 767px) {
+  // Add bottom padding to main content to account for mobile nav
+  .main-content {
+    padding-bottom: calc(var(--mobile-nav-height) + 1rem);
+  }
+
+  // Larger touch targets on mobile
+  .btn,
+  .form-control,
+  .form-select {
+    min-height: 44px;
+  }
+
+  // Increase font size slightly on mobile
+  body {
+    font-size: 0.9375rem;
+  }
+}
