@@ -107,9 +107,11 @@
         <div class="card custom-card">
             <div class="card-header d-flex justify-content-between align-items-center">
                 <h5 class="mb-0"><i class="bi bi-clipboard-check me-2"></i>آخر التقييمات</h5>
-                <a href="{{ route('parent.evaluations.index') }}" class="btn btn-sm btn-outline-primary">
+                @if($data['children']->isNotEmpty())
+                <a href="{{ route('parent.evaluations.index', $data['children']->first()) }}" class="btn btn-sm btn-outline-primary">
                     عرض الكل
                 </a>
+                @endif
             </div>
             <div class="card-body p-0">
                 <div class="table-responsive">
@@ -147,9 +149,11 @@
         <div class="card custom-card">
             <div class="card-header d-flex justify-content-between align-items-center">
                 <h5 class="mb-0"><i class="bi bi-images me-2"></i>أحدث الصور</h5>
-                <a href="{{ route('parent.photos.index') }}" class="btn btn-sm btn-outline-primary">
+                @if($data['children']->isNotEmpty())
+                <a href="{{ route('parent.photos.index', $data['children']->first()) }}" class="btn btn-sm btn-outline-primary">
                     عرض الكل
                 </a>
+                @endif
             </div>
             <div class="card-body">
                 <div class="row g-2">
@@ -180,7 +184,7 @@
         <div class="card custom-card">
             <div class="card-header d-flex justify-content-between align-items-center">
                 <h5 class="mb-0"><i class="bi bi-receipt me-2"></i>الفواتير المعلقة</h5>
-                <a href="{{ route('parent.fees.index') }}" class="btn btn-sm btn-outline-primary">
+                <a href="{{ route('parent.invoices.index') }}" class="btn btn-sm btn-outline-primary">
                     عرض الكل
                 </a>
             </div>
