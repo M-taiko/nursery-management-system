@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Storage;
 
 class Child extends Model
 {
@@ -89,7 +90,7 @@ class Child extends Model
     public function getPhotoUrlAttribute(): string
     {
         if ($this->photo) {
-            return asset('storage/' . $this->photo);
+            return Storage::disk('public')->url($this->photo);
         }
         return 'https://ui-avatars.com/api/?name=' . urlencode($this->name) . '&background=f472b6&color=fff';
     }

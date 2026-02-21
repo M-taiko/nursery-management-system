@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Storage;
 
 class ChildPhoto extends Model
 {
@@ -42,12 +43,14 @@ class ChildPhoto extends Model
 
     public function getPhotoUrlAttribute(): string
     {
-        return asset('storage/' . $this->photo_path);
+        return Storage::disk('public')->url($this->photo_path);
     }
 
     public function getThumbnailUrlAttribute(): ?string
     {
-        return $this->thumbnail_path ? asset('storage/' . $this->thumbnail_path) : $this->photo_url;
+        return $this->thumbnail_path
+            ? Storage::disk('public')->url($this->thumbnail_path)
+            : $this->photo_url;
     }
 
     public function getFileSizeFormattedAttribute(): string
