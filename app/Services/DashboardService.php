@@ -96,9 +96,11 @@ class DashboardService
             ->whereIn('status', ['pending', 'partial'])
             ->count();
 
+        // remaining_amount is a PHP accessor (not a DB column), calculate via raw SQL
         $totalDue = FeeInvoice::whereIn('child_id', $childrenIds)
             ->whereIn('status', ['pending', 'partial'])
-            ->sum('remaining_amount');
+            ->selectRaw('COALESCE(SUM(total - COALESCE((SELECT SUM(amount) FROM payments WHERE fee_invoice_id = fee_invoices.id), 0)), 0) as total_remaining')
+            ->value('total_remaining') ?? 0;
 
         $recentEvaluations = DailyEvaluation::whereIn('child_id', $childrenIds)
             ->with(['child', 'subject'])
