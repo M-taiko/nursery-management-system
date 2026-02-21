@@ -59,7 +59,8 @@ body {
     background: var(--sidebar-bg);
     overflow-y: auto;
     overflow-x: hidden;
-    transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+                visibility 0.35s ease;
     display: flex;
     flex-direction: column;
 
@@ -599,12 +600,18 @@ body {
 // MOBILE RESPONSIVE
 // ============================================
 @media (max-width: 991.98px) {
+    // Sidebar hidden by default on mobile
     .sidebar {
-        transform: translateX(110%); // Slightly more than 100% to ensure fully hidden
+        transform: translateX(110%);
+        visibility: hidden;
+        pointer-events: none;
         box-shadow: none;
 
+        // Sidebar visible when open
         &.show {
             transform: translateX(0);
+            visibility: visible;
+            pointer-events: auto;
             box-shadow: -8px 0 40px rgba(0,0,0,0.3);
         }
     }

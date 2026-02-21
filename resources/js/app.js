@@ -151,15 +151,24 @@ function handleSwipe() {
 }
 
 // ============================================
-// Page Transition Effect
+// Page Transition Effect + Reset body scroll on load
 // ============================================
 
 document.addEventListener('DOMContentLoaded', function () {
-    const mainContent = document.querySelector('.main-content');
+    // Always reset body overflow on page load (in case sidebar was open)
+    document.body.style.overflow = '';
 
+    const mainContent = document.querySelector('.main-content');
     if (mainContent) {
         mainContent.classList.add('animate-fade-in-up');
     }
+
+    // Close sidebar when a nav link is clicked (before navigation)
+    document.querySelectorAll('.sidebar .nav-link, .sidebar .btn-logout').forEach(function (link) {
+        link.addEventListener('click', function () {
+            document.body.style.overflow = '';
+        });
+    });
 });
 
 // ============================================
