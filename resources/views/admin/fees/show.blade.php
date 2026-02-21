@@ -47,8 +47,10 @@
         margin-bottom: 18px;
         border-bottom: 3px solid #4e73df;
     }
-    .inv-logo h1 { font-size: 20px; font-weight: 800; color: #4e73df !important; margin: 0; }
-    .inv-logo p  { font-size: 11px; color: #666 !important; margin: 0; }
+    .inv-logo { display: flex; align-items: center; gap: 10px; }
+    .inv-logo img { width: 60px; height: 60px; object-fit: contain; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .inv-logo-text h1 { font-size: 20px; font-weight: 800; color: #4e73df !important; margin: 0; }
+    .inv-logo-text p  { font-size: 11px; color: #666 !important; margin: 0; }
     .inv-title   { text-align: left; }
     .inv-title h2{ font-size: 22px; font-weight: 800; color: #4e73df !important; margin: 0; }
     .inv-title .inv-num { font-size: 12px; color: #555 !important; }
@@ -119,8 +121,11 @@
 <div class="invoice-print">
     <div class="inv-header">
         <div class="inv-logo">
-            <h1>&#127891; الحضانة</h1>
-            <p>نظام الإدارة المتكامل</p>
+            <img src="{{ asset('images/logo.jpg') }}" alt="شعار الحضانة">
+            <div class="inv-logo-text">
+                <h1>الحضانة</h1>
+                <p>نظام الإدارة المتكامل</p>
+            </div>
         </div>
         <div class="inv-title">
             <h2>فاتورة رسوم</h2>
