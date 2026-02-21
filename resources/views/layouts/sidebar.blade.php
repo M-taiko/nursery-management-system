@@ -2,7 +2,7 @@
 
 <aside id="sidebar" class="sidebar" x-data x-bind:class="{ 'show': $store.sidebar.open }">
     <!-- Logo -->
-    <div class="sidebar-logo" data-aos="fade-down" data-aos-delay="100">
+    <div class="sidebar-logo">
         <div class="logo-icon">
             <img src="{{ asset('images/logo.jpg') }}" alt="شعار الحضانة"
                  style="width:44px;height:44px;object-fit:contain;border-radius:10px;">
@@ -11,6 +11,12 @@
             <h1>الحضانة</h1>
             <p>نظام الإدارة المتكامل</p>
         </div>
+        <!-- Close button - mobile only -->
+        <button @click="$store.sidebar.close()"
+                class="sidebar-close-btn d-lg-none"
+                aria-label="إغلاق القائمة">
+            <i class="bi bi-x-lg"></i>
+        </button>
     </div>
 
     <!-- User Info -->

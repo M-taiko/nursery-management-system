@@ -64,10 +64,17 @@ Alpine.store('sidebar', {
 
     toggle() {
         this.open = !this.open;
+        document.body.style.overflow = this.open ? 'hidden' : '';
+    },
+
+    show() {
+        this.open = true;
+        document.body.style.overflow = 'hidden';
     },
 
     close() {
         this.open = false;
+        document.body.style.overflow = '';
     }
 });
 
@@ -99,29 +106,10 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 // ============================================
-// Sidebar Toggle (Legacy support)
+// Auto-hide alerts
 // ============================================
 
 document.addEventListener('DOMContentLoaded', function () {
-    const sidebar = document.getElementById('sidebar');
-    const overlay = document.getElementById('sidebar-overlay');
-    const toggleBtn = document.getElementById('sidebar-toggle');
-
-    if (toggleBtn) {
-        toggleBtn.addEventListener('click', function () {
-            sidebar.classList.toggle('show');
-            overlay.classList.toggle('show');
-        });
-    }
-
-    if (overlay) {
-        overlay.addEventListener('click', function () {
-            sidebar.classList.remove('show');
-            overlay.classList.remove('show');
-        });
-    }
-
-    // Auto-hide alerts
     document.querySelectorAll('.alert-dismissible').forEach(function (alert) {
         setTimeout(function () {
             const bsAlert = bootstrap.Alert.getOrCreateInstance(alert);
@@ -131,40 +119,34 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 // ============================================
-// Mobile Gestures (Swipe to close sidebar)
+// Mobile Gestures (Swipe to open/close sidebar)
+// RTL: sidebar is on the RIGHT side
 // ============================================
 
 let touchStartX = 0;
 let touchEndX = 0;
 
 document.addEventListener('touchstart', (e) => {
-    touchStartX = e.changedTouches[0].screenX;
-});
+    touchStartX = e.changedTouches[0].clientX;
+}, { passive: true });
 
 document.addEventListener('touchend', (e) => {
-    touchEndX = e.changedTouches[0].screenX;
+    touchEndX = e.changedTouches[0].clientX;
     handleSwipe();
-});
+}, { passive: true });
 
 function handleSwipe() {
-    const sidebar = document.getElementById('sidebar');
-    const overlay = document.getElementById('sidebar-overlay');
+    const threshold = 60;
+    const diff = touchStartX - touchEndX; // positive = swipe left, negative = swipe right
 
-    if (!sidebar || !overlay) return;
-
-    const threshold = 50;
-    const diff = touchStartX - touchEndX;
-
-    // Swipe left (close sidebar in RTL)
-    if (diff > threshold && sidebar.classList.contains('show')) {
-        sidebar.classList.remove('show');
-        overlay.classList.remove('show');
+    // RTL: Swipe LEFT from RIGHT edge → open sidebar
+    if (diff > threshold && touchStartX > window.innerWidth - 30) {
+        if (window.Alpine) Alpine.store('sidebar').show();
     }
 
-    // Swipe right from edge (open sidebar in RTL)
-    if (diff < -threshold && touchStartX < 20) {
-        sidebar.classList.add('show');
-        overlay.classList.add('show');
+    // RTL: Swipe RIGHT when sidebar is open → close sidebar
+    if (diff < -threshold && window.Alpine && Alpine.store('sidebar').open) {
+        Alpine.store('sidebar').close();
     }
 }
 

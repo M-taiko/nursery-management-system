@@ -96,6 +96,8 @@ body {
     }
 
     .logo-text {
+        flex: 1;
+        min-width: 0;
         h1 {
             font-size: 1rem;
             font-weight: 700;
@@ -109,6 +111,25 @@ body {
             margin: 0;
         }
     }
+}
+
+// Sidebar close button (mobile only)
+.sidebar-close-btn {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.12);
+    border: 1px solid rgba(255,255,255,0.2);
+    color: rgba(255,255,255,0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    flex-shrink: 0;
+
+    &:hover { background: rgba(255,255,255,0.22); color: #fff; }
+    i { font-size: 0.9rem; }
 }
 
 // User Info
@@ -579,13 +600,26 @@ body {
 // ============================================
 @media (max-width: 991.98px) {
     .sidebar {
-        transform: translateX(100%);
-        &.show { transform: translateX(0); }
+        transform: translateX(110%); // Slightly more than 100% to ensure fully hidden
+        box-shadow: none;
+
+        &.show {
+            transform: translateX(0);
+            box-shadow: -8px 0 40px rgba(0,0,0,0.3);
+        }
     }
 
     .main-content { margin-right: 0; }
 
     .top-navbar { padding: 0 1rem; }
+}
+
+// Ensure sidebar overlay always works
+@media (max-width: 991.98px) {
+    .sidebar-overlay {
+        cursor: pointer;
+        -webkit-tap-highlight-color: transparent;
+    }
 }
 
 @media (max-width: 575px) {
